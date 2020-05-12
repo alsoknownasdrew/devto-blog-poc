@@ -62,46 +62,11 @@ module.exports = {
       options: {
         name: `Gatsby Starter Blog`,
         short_name: `GatsbyJS`,
-        start_url: `/devto-blog-poc/`,
+        start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `content/assets/gatsby-icon.png`,
-        feeds: [
-          {
-            serialize: ({ query: { site, allContentfulPost } }) => {
-              return allContentfulPost.edges.map(edge => {
-                return {
-                  title: edge.node.title,
-                  date: edge.node.createdAt,
-                  url: `${site.siteMetadata.siteUrl}/${edge.node.slug}`,
-                  custom_elements: [
-                    { 'content:encoded': edge.node.markdown.markdown },
-                  ],
-                }
-              })
-            },
-            query: `
-            {
-              allContentfulPost(filter: { project: { eq: "blogPost" } }) {
-                edges {
-                  node {
-                    createdAt
-                    title
-                    slug
-                    project
-                    markdown {
-                      markdown
-                    }
-                  }
-                }
-              }
-            }
-          `,
-            output: "/rss.xml",
-            title: "My custom feed"
-          }
-        ],
       },
     },
     `gatsby-plugin-react-helmet`,
